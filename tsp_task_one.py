@@ -2,19 +2,18 @@ from bs4 import BeautifulSoup
 from math import inf
 import timeit, time
 import itertools
+from decorators import what_time, profile
 
-
-def what_time(method):
-    def timed(*args, **kwargs):
-        start_time = timeit.repeat(repeat=5)
-        cost, best_route = method(*args, **kwargs)
-        return cost, best_route, (timeit.default_timer() - start_time) * 1000
-    return timed
 
 class BaseParser():
     def __init__(self, data_type, number_of_nodes, test):
         self.file_dict = {
             'symetric': {
+                '5': 'symetric_data/test5.xml',
+                '7': 'symetric_data/test7.xml',
+                '10': 'symetric_data/test10.xml',
+                '11': 'symetric_data/test11.xml',
+                '13': 'symetric_data/test13.xml',
                 '14': 'symetric_data/burma14.xml',  #3323
                 '48': 'symetric_data/gr48.xml',
             },
@@ -63,13 +62,15 @@ class Tsp(BaseParser):
         self.run()
 
     def run(self):
+        print("============ OBLICZANIE TSP METODA BF ==================")
         results = self.calculate_symetric_cost(self.adjacency_matrix)
+        print("================= KONIEC OBLICZEN ======================")
         self.print_results(results)
         self.save_results(results)
 
     def save_results(self, results):
-        with open(self.name + '.txt', 'a') as file:
-            file.write(str(results))
+        with open('.\\results\\' + self.name + '.txt', 'a') as file:
+            file.write(str(results) + '\n')
 
     def print_results(self, results):
         print("=================== BEST ROUTE =========================")
@@ -78,6 +79,7 @@ class Tsp(BaseParser):
 
     # Dla symetrycznych nie trzba przeszukiwac wszystkich
     # mozliwych permutacji: [1,2,3] = [2,3,1] = [3,1,2]
+    @profile
     @what_time
     def calculate_symetric_cost(self, data_matrix):
         # import ipdb; ipdb.set_trace()
@@ -101,15 +103,14 @@ class Tsp(BaseParser):
         best_route = []
         routes = itertools.permutations(list(range(len(data_matrix[0]))))
         for route in routes:
+            lenght = len(route)
             new_travel_cost = 0
-            for i in range(len(route) - 1):
+            for i in range(lenght - 1):
                 new_travel_cost += data_matrix[route[i]][route[i + 1]]
-            new_travel_cost += data_matrix[route[len(route) - 1]][0]
+            new_travel_cost += data_matrix[route[lenght - 1]][0]
             if new_travel_cost < cost:
                 cost, best_route = new_travel_cost, route
         return cost, best_route
 
 
-
-tsp = Tsp('symetric', '14', True)
-
+X = Tsp('symetric', '14', False)
