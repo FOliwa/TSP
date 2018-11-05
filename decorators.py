@@ -1,12 +1,14 @@
 import timeit, cProfile, pstats, io
+import time
 
 
-# TODO: USE timeit IN DIFRENT WAY
+# TODO: USE timeit IN DIFRENT WAY tutaj jest cos zle...
 def what_time(func):
     def timed(*args, **kwargs):
-        start_time = timeit.default_timer()
+        start_time = time.time()
         cost, best_route = func(*args, **kwargs)
-        return cost, best_route, (timeit.default_timer() - start_time)
+        elapsed_time = time.time() - start_time
+        return cost, best_route, elapsed_time
     return timed
 
 
