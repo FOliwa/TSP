@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from math import inf
+import timeit
 import datetime
 import itertools
 from decorators import what_time, profile
@@ -138,10 +139,11 @@ class TspDynamicProgramming(BaseParser):
 
     def run(self):
         print("============ OBLICZANIE TSP METODA DP ==================")
-        print(self.dynamic_programming_calculations(1,0))
+        results = self.dynamic_programming_calculations(1, 0)
+        print("Koszt minimalny to : ", results)
         print("================= KONIEC OBLICZEN ======================")
+        # self.save_results(results)
 
-    
     def dynamic_programming_calculations(self, mask, possition):    # maska to 2^N, pozycji mamy N - zlozonosc [2^N]*N
         # import ipdb; ipdb.set_trace()
         if mask == self.VISITED_ALL:
@@ -152,18 +154,15 @@ class TspDynamicProgramming(BaseParser):
         if self.dp_matrix[mask][possition] != -1:
             return self.dp_matrix[mask][possition]
         
-        ans = inf
+        cost = inf
         # Proba odwiedzenia miasta w ktorym podroznik jeszcze nie byl
         for city in range(self.number_of_cities):
             if (mask&(1<<city)) == 0:
-                newAns = self.adjacency_matrix[possition][city] + self.dynamic_programming_calculations(mask | (1<<city), city)
-                ans = min(ans, newAns)
-        self.dp_matrix[mask][possition] = ans
-        return ans
-        
+                newCost = self.adjacency_matrix[possition][city] + self.dynamic_programming_calculations(mask | (1<<city), city)
+                cost = min(cost, newCost)
+        self.dp_matrix[mask][possition] = cost
+        return cost
 
 
-    
-
-X = TspBrutForce(test=True)
-Y = TspDynamicProgramming(test=True)
+# X = TspBrutForce(test=True)
+Y = TspDynamicProgramming('symetric', '5', False)
