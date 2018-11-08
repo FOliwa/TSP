@@ -25,13 +25,10 @@ def bf_main_loop(routes, data_matrix, cost=inf, best_route=None):
         for i in range(len(route) - 1):
             new_travel_cost += data_matrix[route[i]][route[i + 1]]
         new_travel_cost += data_matrix[route[len(route) - 1]][0]
-        if new_travel_cost < cost:                          # Pozbycie sie sprawdzenia tego warunku zaoszczedza 0.1 s. Znikoma kozysc...
+        if new_travel_cost < cost:                          
             cost, best_route = new_travel_cost, route
     return cost, best_route
 
 how_it_takes = timeit.timeit('bf_main_loop(*bf_setup())', setup="from __main__ import bf_setup, bf_main_loop", number=1000000000)
-""" Z testu wynika ze sprawdzenie wyniku dla 1 mln sciezki wynosi okolo 5s.
-    Do sprawdzenia w przypadku symetrycznych danych mamy 6 227 020 800 roznych tras [dla 14 miast mam [14 - 1]!]
-    Sprawdzenie wszystkich tras [Ilosc tras * 5s]/1mln zajmie okolo 2h godziny"""
 print(how_it_takes)
 
