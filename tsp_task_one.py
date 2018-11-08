@@ -118,5 +118,5 @@ class Tsp(BaseParser):
         return cost, best_route
 
 
-X = Tsp('symetric', '11', False)
+X = Tsp('symetric', '14', False)
 # Y = Tsp('asymetric', '5', True)

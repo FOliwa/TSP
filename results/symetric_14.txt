@@ -1,0 +1,19 @@
+(3323, (1, 13, 2, 3, 4, 5, 11, 6, 12, 7, 10, 8, 9), 16720.583429574966)
+
+=============================OUTPUT============================================================
+         6 function calls in 16720.583 seconds = 4h 35min
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000 16720.583 16720.583 F:\WORK_SPACE\Python\TSP\decorators.py:7(timed)
+        1 16720.583 16720.583 16720.583 16720.583 tsp_task_one.py:89(calculate_symetric_cost)
+        2    0.000    0.000    0.000    0.000 {built-in method time.time}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+
+================= KONIEC OBLICZEN ======================
+=================== BEST ROUTE =========================
+KOSZT:  3323  --- TRASA:  (1, 13, 2, 3, 4, 5, 11, 6, 12, 7, 10, 8, 9)
