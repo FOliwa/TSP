@@ -128,8 +128,12 @@ class TspDynamicProgramming(BaseParser):
     def __init__(self, data_type='symetric', number_of_nodes='14', test=False):
         BaseParser.__init__(self, data_type, number_of_nodes, test)
         self.number_of_cities = len(self.adjacency_matrix[0])
-        # maska bitowa wypelniona jedynkami oznacza ze wszystkie miasta zostaly odwiedzone
-        self.VISITED_ALL = (1 << self.number_of_cities) - 1
+        # Maska bitowa wypelniona jedynkami oznacza ze wszystkie miasta zostaly odwiedzone
+        # Dla 4 miast maska ma postac 1111 
+        self.VISITED_ALL = (1 << self.number_of_cities) - 1   
+        # Tablica zawierajaca rezultaty dla konkrtenych par maska-pozycja - pomocne do optymalizacji kodu
+        # Wratosci poczatkowe ustawione na -1.
+        self.dp_matrix = [[-1 for x in range(self.number_of_cities)] for y in range(2**self.number_of_cities)]
         self.run()
 
     def run(self):
@@ -137,10 +141,16 @@ class TspDynamicProgramming(BaseParser):
         print(self.dynamic_programming_calculations(1,0))
         print("================= KONIEC OBLICZEN ======================")
 
-    def dynamic_programming_calculations(self, mask, possition):
+    
+    def dynamic_programming_calculations(self, mask, possition):    # maska to 2^N, pozycji mamy N - zlozonosc [2^N]*N
         # import ipdb; ipdb.set_trace()
         if mask == self.VISITED_ALL:
             return self.adjacency_matrix[possition][0]
+
+        # Sprawdzenie czy nie obliczm jakiejs sciezki kolejny raz
+        # Jesli wartosc w tablicy dp jest rozna -1 to oznacza ze dla tej maski i pozycji mam juz wyliczona wartosc
+        if self.dp_matrix[mask][possition] != -1:
+            return self.dp_matrix[mask][possition]
         
         ans = inf
         # Proba odwiedzenia miasta w ktorym podroznik jeszcze nie byl
@@ -148,11 +158,12 @@ class TspDynamicProgramming(BaseParser):
             if (mask&(1<<city)) == 0:
                 newAns = self.adjacency_matrix[possition][city] + self.dynamic_programming_calculations(mask | (1<<city), city)
                 ans = min(ans, newAns)
+        self.dp_matrix[mask][possition] = ans
         return ans
         
 
 
     
 
-# X = TspBrutForce(test=True)
+X = TspBrutForce(test=True)
 Y = TspDynamicProgramming(test=True)
