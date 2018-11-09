@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from math import inf
-import timeit
+import time
 import datetime
 import itertools
 from decorators import what_time, profile
@@ -8,17 +8,26 @@ from decorators import what_time, profile
 
 file_dict = {
     'symetric': {
-        '5': 'symetric_data/test5.xml',
-        '7': 'symetric_data/test7.xml',
-        '10': 'symetric_data/test10.xml',
-        '11': 'symetric_data/test11.xml',
-        '13': 'symetric_data/test13.xml',
-        '14': 'symetric_data/burma14.xml',  # 3323
+        # Pliki stworzone na potrzeby testow
+        '5': 'symetric_data/test/test5.xml',
+        '7': 'symetric_data/test/test7.xml',
+        '10': 'symetric_data/test/test10.xml',
+        '11': 'symetric_data/test/test11.xml',
+        '13': 'symetric_data/test/test13.xml',
+        # Pliki ze strony TSPLIB
+        '14': 'symetric_data/burma14.xml',
         '48': 'symetric_data/gr48.xml',
+        '130':'symetric_data/ch130.xml',
+        '280':'symetric_data/a280.xml',
+        '431':'symetric_data/gr431.xml',
+        '783':'symetric_data/rat783.xml',
+        '1060':'symetric_data/u1060.xml',
     },
     'asymetric': {
         '17': 'asymetric_data/br17.xml',
         '33': 'asymetric_data/ftv33.xml',
+        '64': 'asymetric_data/ftv64.xml',
+        '170': 'asymetric_data/ftv170.xml',
     }
 }
 
@@ -139,13 +148,15 @@ class TspDynamicProgramming(BaseParser):
 
     def run(self):
         print("============ OBLICZANIE TSP METODA DP ==================")
-        results = self.dynamic_programming_calculations(1, 0)
+        start_time = time.time()
+        results = [self.dynamic_programming_calculations(1, 0)]
+        elapsed_time = time.time() - start_time
+        results.append(elapsed_time)
         print("Koszt minimalny to : ", results)
         print("================= KONIEC OBLICZEN ======================")
-        # self.save_results(results)
+        self.save_results(results)
 
     def dynamic_programming_calculations(self, mask, possition):    # maska to 2^N, pozycji mamy N - zlozonosc [2^N]*N
-        # import ipdb; ipdb.set_trace()
         if mask == self.VISITED_ALL:
             return self.adjacency_matrix[possition][0]
 
@@ -158,11 +169,11 @@ class TspDynamicProgramming(BaseParser):
         # Proba odwiedzenia miasta w ktorym podroznik jeszcze nie byl
         for city in range(self.number_of_cities):
             if (mask&(1<<city)) == 0:
-                newCost = self.adjacency_matrix[possition][city] + self.dynamic_programming_calculations(mask | (1<<city), city)
-                cost = min(cost, newCost)
+                new_cost = self.adjacency_matrix[possition][city] + self.dynamic_programming_calculations(mask | (1 << city), city)
+                cost = min(cost, new_cost)
         self.dp_matrix[mask][possition] = cost
         return cost
 
 
-# X = TspBrutForce(test=True)
-Y = TspDynamicProgramming('symetric', '5', False)
+X = TspBrutForce('symetric', '11', False)
+Y = TspDynamicProgramming('asymetric', '33', False)

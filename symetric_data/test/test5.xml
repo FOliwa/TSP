@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<travellingSalesmanProblemInstance>
+
+  <name>burma14</name>
+
+  <source>TSPLIB</source>
+
+  <description>14-Staedte in Burma (Zaw Win)</description>
+
+  <doublePrecision>15</doublePrecision>
+
+  <ignoredDigits>5</ignoredDigits>
+
+  <graph>
+    <vertex>
+      <edge cost="1.530000000000000e+02">1</edge>
+      <edge cost="5.100000000000000e+02">2</edge>
+      <edge cost="7.060000000000000e+02">3</edge>
+      <edge cost="9.660000000000000e+02">4</edge>
+    </vertex>
+    <vertex>
+      <edge cost="1.530000000000000e+02">0</edge>
+      <edge cost="4.220000000000000e+02">2</edge>
+      <edge cost="6.640000000000000e+02">3</edge>
+      <edge cost="9.970000000000000e+02">4</edge>
+    </vertex>
+    <vertex>
+      <edge cost="5.100000000000000e+02">0</edge>
+      <edge cost="4.220000000000000e+02">1</edge>
+      <edge cost="2.890000000000000e+02">3</edge>
+      <edge cost="7.440000000000000e+02">4</edge>
+    </vertex>
+    <vertex>
+      <edge cost="7.060000000000000e+02">0</edge>
+      <edge cost="6.640000000000000e+02">1</edge>
+      <edge cost="2.890000000000000e+02">2</edge>
+      <edge cost="4.910000000000000e+02">4</edge>
+    </vertex>
+    <vertex>
+      <edge cost="9.660000000000000e+02">0</edge>
+      <edge cost="9.970000000000000e+02">1</edge>
+      <edge cost="7.440000000000000e+02">2</edge>
+      <edge cost="4.910000000000000e+02">3</edge>
+    </vertex>
+
+  </graph>
+
+</travellingSalesmanProblemInstance>
