@@ -2,7 +2,7 @@ import timeit, cProfile, pstats, io
 import time
 
 
-# TODO: USE timeit IN DIFRENT WAY tutaj jest cos zle...
+
 def what_time(func):
     def timed(*args, **kwargs):
         start_time = time.time()
