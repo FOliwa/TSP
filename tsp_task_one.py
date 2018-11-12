@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from math import inf
 import time
-import datetime
 import itertools
 from decorators import what_time, profile
 
@@ -175,5 +174,5 @@ class TspDynamicProgramming(BaseParser):
         return cost
 
 
-X = TspBrutForce('symetric', '11', False)
-Y = TspDynamicProgramming('asymetric', '33', False)
+# X = TspBrutForce('symetric', '11', False)
+Y = TspDynamicProgramming('asymetric', '17', False)
