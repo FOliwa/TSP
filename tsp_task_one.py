@@ -35,6 +35,7 @@ test_matrix = [[0, 20, 42, 25],
                [42, 30, 0, 10],
                [25, 34, 10, 0]]     #Min cost = 85
 
+
 class BaseParser():
     def __init__(self, data_type, number_of_nodes, test):
         self.adjacency_matrix = []
@@ -66,7 +67,7 @@ class BaseParser():
 
     def display_matrix(self):
         for row in self.adjacency_matrix:
-            print(row)
+            print(row,',')
 
     def save_results(self, results):
         with open('.\\results\\' + self.name + '.txt', 'a') as file:
@@ -175,4 +176,6 @@ class TspDynamicProgramming(BaseParser):
 
 
 # X = TspBrutForce('symetric', '11', False)
-Y = TspDynamicProgramming('asymetric', '17', False)
+# Y = TspDynamicProgramming('asymetric', '17', False)
+
+parser = BaseParser('symetric', '130', False)
