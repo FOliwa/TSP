@@ -1,0 +1,11 @@
+final_cost=54 | time=4.843747854232788 | route=[10, 9, 8, 7, 16, 0, 2, 11, 6, 3, 4, 5, 15, 14, 12, 13, 1] | tabu_value=3 | iter_number=5000
+final_cost=53 | time=5.1449878215789795 | route=[6, 10, 9, 1, 0, 11, 13, 2, 12, 15, 5, 3, 4, 8, 16, 7, 14] | tabu_value=3 | iter_number=5000
+final_cost=59 | time=5.099032402038574 | route=[0, 15, 6, 3, 4, 14, 5, 7, 1, 12, 10, 2, 9, 16, 8, 11, 13] | tabu_value=3 | iter_number=5000
+final_cost=50 | time=5.446982383728027 | route=[10, 9, 0, 11, 7, 16, 1, 13, 2, 12, 5, 14, 15, 6, 3, 4, 8] | tabu_value=3 | iter_number=5000
+final_cost=91 | time=5.131031036376953 | route=[3, 4, 15, 5, 9, 10, 1, 12, 13, 2, 11, 7, 16, 8, 14, 6, 0] | tabu_value=3 | iter_number=5000
+final_cost=95 | time=4.87131929397583 | route=[13, 2, 1, 0, 11, 15, 3, 4, 16, 7, 8, 12, 9, 10, 14, 5, 6] | tabu_value=3 | iter_number=5000
+final_cost=111 | time=4.985067844390869 | route=[4, 7, 11, 13, 2, 1, 12, 6, 5, 3, 15, 14, 10, 9, 16, 8, 0] | tabu_value=3 | iter_number=5000
+final_cost=44 | time=4.995505094528198 | route=[9, 7, 8, 16, 15, 5, 14, 4, 3, 6, 12, 10, 1, 2, 13, 11, 0] | tabu_value=3 | iter_number=5000
+final_cost=63 | time=4.761091709136963 | route=[9, 16, 4, 3, 6, 14, 15, 10, 12, 11, 0, 13, 2, 1, 8, 7, 5] | tabu_value=3 | iter_number=5000
+final_cost=47 | time=5.094838380813599 | route=[1, 2, 13, 12, 9, 10, 7, 8, 4, 3, 15, 5, 6, 14, 11, 0, 16] | tabu_value=3 | iter_number=5000
+final_cost=55 | time=5.144859075546265 | route=[9, 10, 12, 2, 13, 0, 11, 7, 8, 16, 4, 3, 14, 6, 15, 1, 5] | tabu_value=3 | iter_number=5000

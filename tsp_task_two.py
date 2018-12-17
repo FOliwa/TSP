@@ -7,7 +7,6 @@ test_data = [[0, 1, 3, 4, 5],
              [3, 1, 0, 5, 1],
              [4, 4, 5, 0, 2],
              [5, 8, 1, 2, 0]]
-
 data_set_14 = [[0, 153, 510, 706, 966, 581, 455, 70, 160, 372, 157, 567, 342, 398],
                 [153, 0, 422, 664, 997, 598, 507, 197, 311, 479, 310, 581, 417, 376],
                 [510, 422, 0, 289, 744, 390, 437, 491, 645, 880, 618, 374, 455, 211],
@@ -310,4 +309,30 @@ class TspTabuSearch:
         with open('.\\results\\' + self.name + '.txt', 'a') as file:
             file.write(results + '\n')
 
-t = TspTabuSearch(data_set_130)
+# TESTY:
+from data.asym import a_17, a_33, a_64, a_170
+from data.sym import s_14,s_48, s_130, s_280, s_431
+
+
+t = TspTabuSearch(a_64.data)
+
+
+# dane2 = [s_130.data, a_170.data, s_280.data, s_431]
+# for item in dane2:
+#     t = TspTabuSearch(item)
+#     del t
+
+# OPTIMA
+# SYMETRIC
+# a280 : 2579
+# burma14 : 3323
+# ch130 : 6110
+# gr48 : 5046
+# gr431 : 171414
+# rat783 : 8806
+# ASYMETRIC :
+# br17: 39
+# ftv33: 1286
+# ftv64: 1839
+# ftv170: 2755
+
