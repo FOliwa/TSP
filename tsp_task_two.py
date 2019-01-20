@@ -1,5 +1,6 @@
 from random import randint
 from decorators import what_time
+import random
 
 # Representing the problem environment
 test_data = [[0, 1, 3, 4, 5],
@@ -208,7 +209,7 @@ class TspTabuSearch:
         self.data_matrix = tsp_data
         self.nodes_number = len(tsp_data[0])
         self.tabu_list = self.generate_tabu_list()
-        self.number_of_iterations = 5000
+        self.number_of_iterations = 300
         self.tabu_value = 3
         self.name = 'ts_' + str(self.nodes_number)
         self.exit_scores_list = []    # zapisuje tutaj wyniki ktore ulegna pogorszeniu w sytuacji gdyby nie znalesziono lepszego wyniku
@@ -223,11 +224,27 @@ class TspTabuSearch:
             self.get_best_neighbour()
         return self.best_global_cost, self.best_global_sol
 
+    def calculate_cost_2(self, x, y, route):
+        cost = 0
+        try:
+            cost = self.data_matrix[route[x-1]][route[x]] + self.data_matrix[route[x]][route[x+1]] + self.data_matrix[route[y-1]][route[y]] + self.data_matrix[route[y]][route[y+1]]
+            return cost
+        except Exception:
+            if x == 0:
+                pass
+            if y == 0:
+                pass
+            if x == len(self.data_matrix):
+                pass
+            if y == len(self.data_matrix):
+                pass
+            return cost
+
     def get_best_neighbour(self):
         route = self.best_global_sol
         top_10_swaps_list = []
-        for x in range(1, self.nodes_number - 1):
-            for y in range(2, self.nodes_number - 1):
+        for x in range(self.nodes_number - 1):
+            for y in range(self.nodes_number - 1):
                 if x != y:
                     route[x], route[y] = route[y], route[x]     # SWAP ELEMENTS TO GRADE NEW ROUTE
                     new_cost = self.calculate_cost(route)
@@ -239,7 +256,7 @@ class TspTabuSearch:
         # ASPIRATION CRITERIA
         # 1
         for item in top_10_swaps_list:
-            if item[0] < self.best_global_cost and self.tabu_list[item[1]][item[2]] == 0:
+            if item[0] <= self.best_global_cost and self.tabu_list[item[1]][item[2]] == 0:
                 route[item[1]], route[item[2]] = route[item[2]], route[item[1]]
                 self.best_global_cost = item[0]
                 self.decrement_tabu_list()
@@ -247,16 +264,18 @@ class TspTabuSearch:
                 return 1
 
         # ASPIRATION CRITERIA 1
-        for item in top_10_swaps_list:
+        # for item in top_10_swaps_list:
             if item[0] < self.best_global_cost and self.tabu_list[item[1]][item[2]] != 0:
                 route[item[1]], route[item[2]] = route[item[2]], route[item[1]]
                 self.best_global_cost = item[0]
                 self.tabu_list[item[1]][item[2]] = 0
+                self.decrement_tabu_list()
+                self.set_tabu_move(item[1], item[2])
                 return 1
 
         # ASPIRATION CRITERIA 2
-        for item in top_10_swaps_list:
-            if item[0] > self.best_global_cost and self.tabu_list[item[1]][item[2]] != 0:
+        # for item in top_10_swaps_list:
+            if item[0] > self.best_global_cost and self.tabu_list[item[1]][item[2]] == 0:
                 self.exit_scores_list.append((self.best_global_cost, self.best_global_sol))
                 route[item[1]], route[item[2]] = route[item[2]], route[item[1]]
                 self.best_global_cost = item[0]
@@ -286,13 +305,12 @@ class TspTabuSearch:
         for i in range(self.nodes_number):
             tl.append([0]*self.nodes_number)
         return tl
+        # c = list(range(0, self.nodes_number))
+        # return list(random.sample(c, self.nodes_number))
 
     def generate_init_solution(self):
         init_sol = list(range(self.nodes_number))
-        for i in range(self.nodes_number * 3):
-            x, y = randint(0, self.nodes_number-1), randint(0, self.nodes_number-1)
-            init_sol[x], init_sol[y] = init_sol[y], init_sol[x]
-        return init_sol
+        return random.sample(init_sol, self.nodes_number)
 
     def print_results(self, cost, route, time):
         if any(i[0] > self.best_global_cost for i in self.exit_scores_list):
@@ -311,11 +329,20 @@ class TspTabuSearch:
 
 # TESTY:
 from data.asym import a_17, a_33, a_64, a_170
-from data.sym import s_14,s_48, s_130, s_280, s_431
+from data.sym import s_14,s_48, s_130, s_280
 
 
-t = TspTabuSearch(a_64.data)
+TspTabuSearch(s_130.data)
 
+# for i in range(50):
+#     TspTabuSearch(s_14.data)
+#     TspTabuSearch(a_17.data)
+#     TspTabuSearch(a_33.data)
+#     TspTabuSearch(s_48.data)
+
+# for j in range(50):
+    #TspTabuSearch(s_130.data)
+    #TspTabuSearch(s_280.data)
 
 # dane2 = [s_130.data, a_170.data, s_280.data, s_431]
 # for item in dane2:
