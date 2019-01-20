@@ -208,8 +208,8 @@ class TspTabuSearch:
         self.data_matrix = tsp_data
         self.nodes_number = len(tsp_data[0])
         self.tabu_list = self.generate_tabu_list()
-        self.number_of_iterations = 5000
-        self.tabu_value = 3
+        self.number_of_iterations = 300
+        self.tabu_value = 5
         self.name = 'ts_' + str(self.nodes_number)
         self.exit_scores_list = []    # zapisuje tutaj wyniki ktore ulegna pogorszeniu w sytuacji gdyby nie znalesziono lepszego wyniku
         # START ALGORYTMU
@@ -310,11 +310,11 @@ class TspTabuSearch:
             file.write(results + '\n')
 
 # TESTY:
-from data.asym import a_17, a_33, a_64, a_170
-from data.sym import s_14,s_48, s_130, s_280, s_431
+#from data.asym import a_17, a_33, a_64, a_170
+#from data.sym import s_14,s_48, s_130, s_280, s_431
 
 
-t = TspTabuSearch(a_64.data)
+t = TspTabuSearch(data_set_130)
 
 
 # dane2 = [s_130.data, a_170.data, s_280.data, s_431]

@@ -1,0 +1,3 @@
+final_cost=3603 | time=2.53316068649292 | route=[10, 8, 9, 0, 1, 12, 13, 2, 3, 4, 5, 11, 6, 7] | tabu_value=3 | iter_number=5000
+final_cost=3741 | time=2.5466480255126953 | route=[2, 3, 4, 5, 11, 13, 1, 0, 9, 8, 10, 7, 6, 12] | tabu_value=3 | iter_number=5000
+final_cost=4081 | time=2.5719189643859863 | route=[11, 3, 5, 6, 12, 13, 2, 1, 9, 8, 10, 7, 0, 4] | tabu_value=3 | iter_number=5000
