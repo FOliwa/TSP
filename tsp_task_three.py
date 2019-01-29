@@ -154,18 +154,22 @@ def get_next_generation(current_generation, elite_size, mutation_rate):
     get_next_generation = mutate_population(children, mutation_rate)
     return get_next_generation
 
-
+import time
 def genetic_algorithm(population, pop_size, elite_size, mutation_rate, numbers_of_generations):
+    start_time = time.time()
     pop = initial_population(pop_size, population)
     print("Initial distance: " + str(round(1 / rank_routes(pop)[0][1])))
 
     for i in range(0, numbers_of_generations):
         pop = get_next_generation(pop, elite_size, mutation_rate)
 
+    elapsed_time = time.time() - start_time
     print("Final distance: " + str(round(1 / rank_routes(pop)[0][1])))
+    print("TIME: ", elapsed_time)
     best_route_index = rank_routes(pop)[0][0]
     best_route = pop[best_route_index]
-    print(best_route)
+
+
 
 
 def genetic_algorithm_plot(city_list, pop_size, elite_size, mutation_rate, numbers_of_generations):
@@ -189,16 +193,17 @@ test_matrix = [[0, 1, 3, 4, 5],
              [3, 1, 0, 5, 1],
              [4, 4, 5, 0, 2],
              [5, 8, 1, 2, 0]]
-
-distance_matrix = s_14.data      # 3323
-# distance_matrix = s_48.data    # 5046
+from data.asym import a_170
+# distance_matrix = s_14.data      # 3323
+distance_matrix = s_48.data    # 5046
 # distance_matrix = s_130.data   # 6110
 #
 # distance_matrix = a_17.data    # 39
 # distance_matrix = a_33.data    # 1286
 # distance_matrix = a_64.data    # 1839
+# distance_matrix = a_170.data
 
 cities = [City(i) for i in range(0, len(distance_matrix[0]))]
-x = genetic_algorithm_plot(cities, 100, 10, 0.01, 200)
+x = genetic_algorithm_plot(cities, 150, 50, 0.01, 800)
 # x = genetic_algorithm(cities, 200, 50, 0.05, 300)
 
